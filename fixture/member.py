@@ -27,3 +27,12 @@ class MemberHelper:
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
+
+    def delete_first_member(self):
+        wd = self.app.wd
+        self.open_home_page()
+        # select first member
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
