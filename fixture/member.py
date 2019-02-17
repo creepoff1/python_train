@@ -6,7 +6,7 @@ class MemberHelper:
         wd = self.app.wd
         wd.get("http://localhost/addressbook/")
 
-    def create_member(self, member):
+    def create(self, member):
         wd = self.app.wd
         # init create new member
         wd.find_element_by_link_text("add new").click()
