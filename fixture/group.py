@@ -45,8 +45,9 @@ class GroupHelper:
         self.open_group_page()
         # select first group
         wd.find_element_by_name("selected[]").click()
-        wd.find_element_by_name("edit").click()
         # submit edit
+        wd.find_element_by_name("edit").click()
+        #fill group form
         self.fill_form_group(group)
         # submit group mod
         wd.find_element_by_name("update").click()
