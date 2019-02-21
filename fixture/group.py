@@ -9,7 +9,6 @@ class GroupHelper:
 
     def fill_form_group(self, group):
         wd = self.app.wd
-        wd.find_element_by_name("edit").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
         wd.find_element_by_name("group_name").send_keys(group.name)
@@ -31,12 +30,11 @@ class GroupHelper:
 
 
 
-    def delete_first_group(self,group):
+    def delete_first_group(self):
         wd = self.app.wd
         self.open_group_page()
         # select first group
         wd.find_element_by_name("selected[]").click()
-        self.fill_form_group(group)
         # submit deletion
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
@@ -47,6 +45,7 @@ class GroupHelper:
         self.open_group_page()
         # select first group
         wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_name("edit").click()
         # submit edit
         self.fill_form_group(group)
         # submit group mod
