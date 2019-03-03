@@ -28,6 +28,7 @@ class MemberHelper:
         self.fill_form_member(member)
         # submit member creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+        self.member_cashe = None
 
 
     def return_to_home_page(self):
@@ -43,6 +44,7 @@ class MemberHelper:
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
+        self.member_cashe = None
 
     def mod_first_member(self, member):
         wd = self.app.wd
@@ -54,21 +56,25 @@ class MemberHelper:
         self.fill_form_member(member)
         # Submit
         wd.find_element_by_name("update").click()
+        self.member_cashe = None
 
     def count_member(self):
         wd = self.app.wd
         self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    member_cashe = None
+
     def get_member_list(self):
-        wd = self.app.wd
-        self.open_home_page()
-        members = []
-        for element in wd.find_elements_by_css_selector("tr[name='entry']"):
-            text = element.text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            cells = element.find_elements_by_tag_name("td")
-            l_name = cells[1].text
-            f_name = cells[2].text
-            members.append(Member(firstname=f_name, lastname=l_name, id=id))
-        return members
+        if self.member_cashe is None:
+            wd = self.app.wd
+            self.open_home_page()
+            self.member_cashe = []
+            for element in wd.find_elements_by_css_selector("tr[name='entry']"):
+                text = element.text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                cells = element.find_elements_by_tag_name("td")
+                l_name = cells[1].text
+                f_name = cells[2].text
+                self.member_cashe.append(Member(firstname=f_name, lastname=l_name, id=id))
+        return list(self.member_cashe)
