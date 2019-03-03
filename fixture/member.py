@@ -1,3 +1,4 @@
+from model.member import Member
 class MemberHelper:
     def __init__(self, app):
         self.app = app
@@ -58,3 +59,16 @@ class MemberHelper:
         wd = self.app.wd
         self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_member_list(self):
+        wd = self.app.wd
+        self.open_home_page()
+        members = []
+        for element in wd.find_elements_by_css_selector("tr[name='entry']"):
+            text = element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            cells = element.find_elements_by_tag_name("td")
+            l_name = cells[1].text
+            f_name = cells[2].text
+            members.append(Member(firstname=f_name, lastname=l_name, id=id))
+        return members
