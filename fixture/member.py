@@ -36,27 +36,34 @@ class MemberHelper:
         if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("Send e-Mail")) > 0):
             wd.find_element_by_link_text("home page").click()
 
-    def delete_first_member(self):
+    def select_member_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
+    def delete_member_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
-        # select first member
-        wd.find_element_by_name("selected[]").click()
-        # submit deletion
+        self.select_member_by_index(index)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.member_cashe = None
 
-    def mod_first_member(self, member):
+    def delete_first_member(self):
+        self.delete_member_by_index(0)
+
+    def mod_member_by_index(self, index, member):
         wd = self.app.wd
         self.open_home_page()
-        # select first member
-        wd.find_element_by_name("selected[]").click()
+        self.select_member_by_index(index)
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         # fill member form
         self.fill_form_member(member)
         # Submit
         wd.find_element_by_name("update").click()
         self.member_cashe = None
+
+    def mod_first_member(self):
+        self.mod_member_by_index(0)
 
     def count_member(self):
         wd = self.app.wd
@@ -71,7 +78,6 @@ class MemberHelper:
             self.open_home_page()
             self.member_cashe = []
             for element in wd.find_elements_by_css_selector("tr[name='entry']"):
-                text = element.text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 cells = element.find_elements_by_tag_name("td")
                 l_name = cells[1].text
