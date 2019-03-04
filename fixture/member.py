@@ -10,14 +10,16 @@ class MemberHelper:
 
     def fill_form_member(self, member):
         wd = self.app.wd
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(member.firstname)
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(member.lastname)
-        wd.find_element_by_name("home").click()
-        wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(member.phone)
+        self.change_field_value_member("firstname", member.firstname)
+        self.change_field_value_member("lastname", member.lastname)
+        self.change_field_value_member("home", member.phone)
+
+    def change_field_value_member(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
 
 
     def create(self, member):
