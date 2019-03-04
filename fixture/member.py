@@ -42,6 +42,13 @@ class MemberHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
+    def edit_member_click(self, index):
+        wd = self.app.wd
+        row = wd.find_elements_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[7]
+        cell.find_element_by_tag_name("a").click()
+        self.member_cashe = None
+
     def delete_member_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
@@ -56,8 +63,7 @@ class MemberHelper:
     def mod_member_by_index(self, index, member):
         wd = self.app.wd
         self.open_home_page()
-        self.select_member_by_index(index)
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.edit_member_click(index)
         # fill member form
         self.fill_form_member(member)
         # Submit
