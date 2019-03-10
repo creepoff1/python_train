@@ -28,9 +28,4 @@ def merge_phones_like_on_home_page(member):
                                        [member.phone, member.mobile, member.work, member.phone2]))))
 
 
-def merge_phones_like_on_view_page(member):
-    return "\n".join(filter(lambda x: x != "",
-                            map(lambda x: clear(x),
-                                filter(lambda x: x is not None,
-                                       [member.phone, member.mobile, member.work, member.phone2, member.group2]))))
 
