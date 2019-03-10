@@ -4,7 +4,7 @@ from model.member import Member
 
 def test_add_member(app):
     old_members = app.member.get_member_list()
-    member = Member(firstname="Oleg", lastname="Bulygin", phone="89315969795")
+    member = Member(firstname="Oleg", lastname="Bulygin", phone="89315969795", phone2='7777777', mobile='666666', work='555555')
     app.member.create(member)
     assert len(old_members) + 1 == app.member.count_member()
     new_members = app.member.get_member_list()

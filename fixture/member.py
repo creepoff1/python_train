@@ -14,6 +14,9 @@ class MemberHelper:
         self.change_field_value_member("firstname", member.firstname)
         self.change_field_value_member("lastname", member.lastname)
         self.change_field_value_member("home", member.phone)
+        self.change_field_value_member("phone2", member.phone2)
+        self.change_field_value_member("mobile", member.mobile)
+        self.change_field_value_member("work", member.work)
 
     def change_field_value_member(self, field_name, text):
         wd = self.app.wd
