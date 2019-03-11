@@ -20,7 +20,17 @@ class Member:
         return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
 
     def __eq__(self, other):
-        return (self.id is None or other.id is None or self.id == other.id) and self.firstname == other.firstname and self.lastname == other.lastname
+        return (self.id is None or other.id is None or self.id == other.id) \
+               or self.lastname == other.last_name \
+               or self.firstname == other.first_name \
+               or self.address == other.address \
+               or self.email == other.email \
+               or self.email2 == other.email_2 \
+               or self.email3 == other.email_3 \
+               or self.phone == other.phone \
+               or self.work == other.work_phone \
+               or self.mobile == other.mobile \
+               or self.phone2 == other.phone2 \
 
     def id_or_max(self):
         if self.id:

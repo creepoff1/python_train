@@ -5,6 +5,7 @@ def test_phones_on_home_page(app):
     member_from_home_page = app.member.get_member_list()[0]
     member_from_edit_page = app.member.get_member_info_from_edit_page(0)
     assert member_from_home_page.all_phones_from_home_page == merge_phones_like_on_home_page(member_from_edit_page)
+    assert member_from_home_page.all_emails_from_home_page == merge_emails_like_on_home_page(member_from_edit_page)
 
 
 
@@ -26,6 +27,12 @@ def merge_phones_like_on_home_page(member):
                             map(lambda x: clear(x),
                                 filter(lambda x: x is not None,
                                        [member.phone, member.mobile, member.work, member.phone2]))))
+
+def merge_emails_like_on_home_page(member):
+    return "\n".join(filter(lambda x: x != "",
+                             map(lambda x: clear(x),
+                                 filter(lambda x: x is not None,
+                                        [member.email, member.email2, member.email3]))))
 
 
 
