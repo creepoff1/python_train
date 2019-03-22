@@ -13,7 +13,7 @@ class MemberHelper:
         wd = self.app.wd
         self.change_field_value_member("firstname", member.firstname)
         self.change_field_value_member("lastname", member.lastname)
-        self.change_field_value_member("home", member.phone)
+        self.change_field_value_member("home", member.home)
         self.change_field_value_member("phone2", member.phone2)
         self.change_field_value_member("mobile", member.mobile)
         self.change_field_value_member("work", member.work)
@@ -49,6 +49,10 @@ class MemberHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
+    def select_member_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("a[href='edit.php?id=%s']" % id).click()
+
     def edit_member_click(self, index):
         wd = self.app.wd
         self.app.open_home_page()
@@ -61,6 +65,14 @@ class MemberHelper:
         wd = self.app.wd
         self.open_home_page()
         self.select_member_by_index(index)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        self.member_cashe = None
+
+    def delete_member_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_member_by_id(id)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.member_cashe = None
@@ -95,7 +107,7 @@ class MemberHelper:
             self.member_cashe = []
             for row in wd.find_elements_by_name("entry"):
                 cells = row.find_elements_by_tag_name("td")
-                id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+                id = row.find_element_by_name("selected[]").get_attribute("id")
                 firstname = cells[2].text
                 lastname = cells[1].text
                 address = cells[3].text
@@ -120,7 +132,7 @@ class MemberHelper:
         firstname = wd.find_element_by_name("firstname").get_attribute("value")
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
-        phone = wd.find_element_by_name("home").get_attribute("value")
+        home = wd.find_element_by_name("home").get_attribute("value")
         work = wd.find_element_by_name("work").get_attribute("value")
         mobile = wd.find_element_by_name("mobile").get_attribute("value")
         phone2 = wd.find_element_by_name("phone2").get_attribute("value")
@@ -128,16 +140,23 @@ class MemberHelper:
         email = wd.find_element_by_name("email").get_attribute("value")
         email2 = wd.find_element_by_name("email2").get_attribute("value")
         email3 = wd.find_element_by_name("email3").get_attribute("value")
-        return Member(id=id, firstname=firstname, lastname=lastname, phone=phone, mobile=mobile,
+        return Member(id=id, firstname=firstname, lastname=lastname, home=home, mobile=mobile,
                        work=work, phone2=phone2, address=address, email=email, email2=email2, email3=email3)
 
     def get_member_from_view_page(self, index):
         wd = self.app.wd
         self.open_member_to_view_by_index(index)
         text = wd.find_element_by_id("content").text
-        phone = re.search("H: (.*)", text).group(1)
+        home = re.search("H: (.*)", text).group(1)
         mobile = re.search("M: (.*)", text).group(1)
         work = re.search("W: (.*)", text).group(1)
         phone2 = re.search("P: (.*)", text).group(1)
-        return Member(phone=phone, work=work, mobile=mobile, phone2=phone2)
+        return Member(home=home, work=work, mobile=mobile, phone2=phone2)
+
+    def modify_member_by_id(self, id, member):
+        wd = self.app.wd
+        self.select_member_by_id(id)
+        self.fill_form_member(member)
+        wd.find_element_by_xpath("//input[22]").click()
+        self.contact_cache = None
 

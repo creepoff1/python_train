@@ -31,9 +31,9 @@ def random_strings_for_phones(maxlen):
     symbols = string.digits + "(" + ")" + "+" + "-" + " "
     return "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-testdata = [Member(firstname="", lastname="", phone="", phone2="",
+testdata = [Member(firstname="", lastname="", home="", phone2="",
                     mobile="", work="", email="",email2="", email3="")] \
-    + [Member(firstname=random_strings_for_text_fields("name", 7), lastname=random_strings_for_text_fields("lastname", 7), phone=random_strings_for_phones(20),
+    + [Member(firstname=random_strings_for_text_fields("name", 7), lastname=random_strings_for_text_fields("lastname", 7), home=random_strings_for_phones(20),
               phone2=random_strings_for_phones(10),
               mobile=random_strings_for_phones(15), work=random_strings_for_phones(10), email=random_strings_for_text_fields("email", 12),
               email2=random_strings_for_text_fields("email12", 12), email3=random_strings_for_text_fields("email", 12))

@@ -1,11 +1,11 @@
 from sys import maxsize
 class Member:
-    def __init__(self, id = None, firstname = None, lastname = None, phone = None, mobile = None, work = None, phone2 = None,
+    def __init__(self, id = None, firstname = None, lastname = None, home = None, mobile = None, work = None, phone2 = None,
                  all_phones_from_home_page = None, email = None, address = None, email2 = None, email3 = None, all_emails_from_home_page = None):
         self.id = id
         self.firstname = firstname
         self.lastname = lastname
-        self.phone = phone
+        self.home = home
         self.mobile = mobile
         self.work = work
         self.phone2 = phone2
@@ -17,7 +17,7 @@ class Member:
         self.all_phones_from_home_page = all_phones_from_home_page
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
+        return "%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s" % (self.id, self.firstname, self.lastname, self.address, self.home, self.mobile, self.work, self.phone2, self.address, self.email, self.email2, self.email3)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \
@@ -27,7 +27,7 @@ class Member:
                or self.email == other.email \
                or self.email2 == other.email_2 \
                or self.email3 == other.email_3 \
-               or self.phone == other.phone \
+               or self.home == other.home \
                or self.work == other.work_phone \
                or self.mobile == other.mobile \
                or self.phone2 == other.phone2 \

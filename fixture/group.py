@@ -1,5 +1,8 @@
 from model.group import Group
 class GroupHelper:
+
+    group_cashe = None
+
     def __init__(self, app):
         self.app = app
 
@@ -42,6 +45,10 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
+    def select_group_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
 
     def delete_group_by_index(self, index):
         wd = self.app.wd
@@ -52,6 +59,21 @@ class GroupHelper:
         self.return_to_group_page()
         self.group_cashe = None
 
+    def delete_group_by_id(self, id):
+        wd = self.app.wd
+        self.select_group_by_id(id)
+        wd.find_element_by_name("delete").click()
+        self.return_to_group_page()
+        self.group_cache = None
+
+    def delete_group_by_id(self, id):
+        wd = self.app.wd
+        self.open_group_page()
+        self.select_group_by_id(id)
+        # submit deletion
+        wd.find_element_by_name("delete").click()
+        self.return_to_group_page()
+        self.group_cashe = None
 
     def mod_first_group(self):
         self.modify_group_by_index(0)
@@ -67,14 +89,24 @@ class GroupHelper:
         wd = self.app.wd
         self.open_group_page()
         self.select_group_by_index(index)
-        #open modification form
         wd.find_element_by_name("edit").click()
-        #fill group form
         self.fill_form_group(new_group_data)
-        #submit modification
         wd.find_element_by_name("update").click()
         self.return_to_group_page()
         self.group_cashe = None
+
+    def modify_group_by_id(self, id, new_group_data):
+        wd = self.app.wd
+        self.open_group_page()
+        # Select any group
+        self.select_group_by_id(id)
+        # Open modification form
+        wd.find_element_by_name("edit").click()
+        self.fill_form_group(new_group_data)
+        # Submit modification
+        wd.find_element_by_name("update").click()
+        self.return_to_group_page()
+        self.group_cache = None
 
     def modify_first_group(self):
         self.modify_group_by_index(0)
@@ -84,15 +116,13 @@ class GroupHelper:
         self.open_group_page()
         return len(wd.find_elements_by_name("selected[]"))
 
-    group_cashe = None
-
     def get_group_list(self):
         if self.group_cashe is None:
             wd = self.app.wd
             self.open_group_page()
             self.group_cashe = []
             for element in wd.find_elements_by_css_selector("span.group"):
-                text = element.text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
-                self.group_cashe.append(Group(name=text,id=id))
+                name = element.text
+                self.group_cashe.append(Group(id=id, name=name))
         return list(self.group_cashe)
