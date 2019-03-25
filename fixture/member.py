@@ -79,7 +79,7 @@ class MemberHelper:
         self.open_home_page()
         self.select_member_by_id(id)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
-        wd.switch_to_alert().accept()
+#        wd.switch_to_alert().accept()
         self.member_cashe = None
 
     def delete_first_member(self):
