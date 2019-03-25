@@ -14,7 +14,5 @@ def test_delete_some_member(app, db, check_ui):
     old_members.remove(member)
     assert old_members == new_members
     if check_ui:
-        contact_list = db.get_member_list_with_merged_emails_and_phones()
-        assert sorted(contact_list, key=Member.id_or_max) == sorted(app.member.get_member_list(), key=Member.id_or_max)
-
-
+        member_list = db.get_member_list_with_merged_emails_and_phones()
+        assert sorted(member_list, key=Member.id_or_max) == sorted(app.member.get_member_list(), key=Member.id_or_max)

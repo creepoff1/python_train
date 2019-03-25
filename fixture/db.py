@@ -35,6 +35,9 @@ class DbFixture:
             cursor.close()
         return list
 
+    def destroy(self):
+        self.connection.close()
+
     def get_member_list(self):
         list = []
         cursor = self.connection.cursor()
@@ -46,6 +49,7 @@ class DbFixture:
         finally:
             cursor.close()
         return list
+
 
     def get_member_list_with_merged_emails_and_phones(self):
         list = []
