@@ -1,6 +1,7 @@
-import pymysql
+import pymysql.connections
 from model.group import Group
 from model.member import Member
+
 
 class DbFixture:
 
@@ -35,8 +36,6 @@ class DbFixture:
             cursor.close()
         return list
 
-    def destroy(self):
-        self.connection.close()
 
     def get_member_list(self):
         list = []

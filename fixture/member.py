@@ -1,4 +1,5 @@
 from model.member import Member
+from selenium.webdriver.support.ui import Select
 import re
 import time
 from random import randrange
@@ -164,4 +165,27 @@ class MemberHelper:
         self.fill_form_member(member)
         wd.find_element_by_xpath("//input[22]").click()
         self.contact_cache = None
+
+    def add_group_to_member(self, member, db):
+        wd = self.app.wd
+        self.select_member_by_id(id)
+        wd.find_element_by_name("add").click()
+
+
+    def delete_group_from_contact(self, orm):
+        wd = self.app.wd
+        wd.get("http://localhost/addressbook/index.php?group=")
+        wd.get("http://localhost/addressbook/index.php?group=306")
+        wd.find_element_by_name("remove").click()
+
+    def open_group_page_with_its_member(self, orm):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_name("group").click()
+        group_list = orm.get_group_list()
+        selected_group = random.choice(group_list)
+        Select(wd.find_element_by_name("group")).select_by_visible_text(selected_group.name)
+        return selected_group
+
+
 

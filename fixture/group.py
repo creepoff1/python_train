@@ -117,3 +117,9 @@ class GroupHelper:
                 name = element.text
                 self.group_cashe.append(Group(id=id, name=name))
         return list(self.group_cashe)
+
+    def select_group_from_group_list_on_home_page(self, id):
+        wd = self.app.wd
+        self.open_group_page()
+        wd.find_element_by_name("add")
+        wd.find_element_by_css_selector("select[name='to_group'] option[value='%s']" % id).click()
