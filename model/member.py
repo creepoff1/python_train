@@ -18,18 +18,18 @@ class Member:
         self.all_phones_from_home_page = all_phones_from_home_page
 
     def __repr__(self):
-        return "%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:" % (self.id, self.firstname, self.lastname, self.address, self.home, self.mobile, self.work, self.phone2, self.address, self.email, self.email2, self.email3)
+        return "%s:%s:%s%s:%s:%s:%s:%s:%s:%s:%s:" % (self.id, self.firstname, self.lastname, self.address, self.home, self.mobile, self.work, self.phone2, self.email, self.email2, self.email3)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \
-               or self.lastname == other.last_name \
-               or self.firstname == other.first_name \
+               or self.lastname == other.lastname \
+               or self.firstname == other.firstname \
                or self.address == other.address \
                or self.email == other.email \
                or self.email2 == other.email_2 \
                or self.email3 == other.email_3 \
                or self.home == other.home \
-               or self.work == other.work_phone \
+               or self.work == other.work \
                or self.mobile == other.mobile \
                or self.phone2 == other.phone2 \
 
