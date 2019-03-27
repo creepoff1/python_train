@@ -12,7 +12,7 @@ def test_phones_on_home_page(app):
 def test_phones_on_member_view_page(app):
     member_from_view_page = app.member.get_member_from_view_page(0)
     member_from_edit_page = app.member.get_member_info_from_edit_page(0)
-    assert member_from_view_page.phone == member_from_edit_page.phone
+    assert member_from_view_page.home == member_from_edit_page.home
     assert member_from_view_page.mobile == member_from_edit_page.mobile
     assert member_from_view_page.work == member_from_edit_page.work
     assert member_from_view_page.phone2 == member_from_edit_page.phone2
