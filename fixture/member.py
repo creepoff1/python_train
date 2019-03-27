@@ -5,6 +5,8 @@ import time
 from random import randrange
 import random
 from model.group import Group
+from selenium.common.exceptions import NoSuchElementException
+
 
 class MemberHelper:
     def __init__(self, app):
@@ -57,7 +59,7 @@ class MemberHelper:
 
     def select_member_by_id(self, id):
         wd = self.app.wd
-        wd.find_element_by_css_selector("a[href='edit.php?id=%s']" % id).click()
+        wd.find_element_by_xpath("//input[contains(@value, '%s')]" % id).click()
 
     def edit_member_click(self, index):
         wd = self.app.wd
@@ -80,7 +82,7 @@ class MemberHelper:
         self.open_home_page()
         self.select_member_by_id(id)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
-#        wd.switch_to_alert().accept()
+        wd.switch_to_alert().accept()
         self.member_cashe = None
 
     def delete_first_member(self):
@@ -159,33 +161,31 @@ class MemberHelper:
         phone2 = re.search("P: (.*)", text).group(1)
         return Member(home=home, work=work, mobile=mobile, phone2=phone2)
 
-    def modify_member_by_id(self, id, member):
+    def modify_member_by_id(self, id, new_member_data):
         wd = self.app.wd
+        self.open_home_page()
         self.select_member_by_id(id)
-        self.fill_form_member(member)
-        wd.find_element_by_xpath("//input[22]").click()
+        wd.find_element_by_xpath("//a[contains(@href,'edit.php?id=" + new_member_data.id + "')]").click()
+        self.fill_form_member(new_member_data)
+        wd.find_element_by_name("update").click()
+        #wd.find_element_by_link_text("Last name")
         self.contact_cache = None
 
-    def add_group_to_member(self, member, db):
+    def add_member_to_group(self, id):
         wd = self.app.wd
         self.select_member_by_id(id)
         wd.find_element_by_name("add").click()
 
-
-    def delete_group_from_contact(self, orm):
+    def open_group_page_with_members(self, selected_group_name):
         wd = self.app.wd
-        wd.get("http://localhost/addressbook/index.php?group=")
-        wd.get("http://localhost/addressbook/index.php?group=306")
-        wd.find_element_by_name("remove").click()
-
-    def open_group_page_with_its_member(self, orm):
-        wd = self.app.wd
-        self.app.open_home_page()
+        self.open_home_page()
         wd.find_element_by_name("group").click()
-        group_list = orm.get_group_list()
-        selected_group = random.choice(group_list)
-        Select(wd.find_element_by_name("group")).select_by_visible_text(selected_group.name)
-        return selected_group
+        Select(wd.find_element_by_name("group")).select_by_visible_text(selected_group_name)
 
+    def delete_member_from_group(self, selected_group_name, member_index):
+        wd = self.app.wd
+        self.open_group_page_with_members(selected_group_name)
+        self.select_member_by_index(member_index)
+        wd.find_element_by_name("remove").click()
 
 
