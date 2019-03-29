@@ -1,7 +1,8 @@
 from sys import maxsize
 class Member:
     def __init__(self, id = None, firstname = None, lastname = None, home = None, mobile = None, work = None, phone2 = None,
-                 all_phones_from_home_page = None, email = None, address = None, email2 = None, email3 = None, all_emails_from_home_page = None, new_group = None):
+                 all_phones_from_home_page = None, email = None, address = None, email2 = None, email3 = None, all_emails_from_home_page = None, new_group = None,
+                 all_phones_from_db = None, all_emails_from_db = None):
         self.id = id
         self.firstname = firstname
         self.lastname = lastname
@@ -16,6 +17,8 @@ class Member:
         self.new_group = new_group
         self.all_emails_from_home_page = all_emails_from_home_page
         self.all_phones_from_home_page = all_phones_from_home_page
+        self.all_emails_from_db = all_emails_from_db
+        self.all_phones_from_db = all_phones_from_db
 
     def __repr__(self):
         return "%s:%s:%s%s:%s:%s:%s:%s:%s:%s:%s:" % (self.id, self.firstname, self.lastname, self.address, self.home, self.mobile, self.work, self.phone2, self.email, self.email2, self.email3)

@@ -11,33 +11,34 @@ def test_assert_all_members_from_home_page_with_db (app, db):
         pass
     members_from_home_page = app.member.get_member_list()
     members_from_db = db.get_member_list_as_at_ui()
-    assert sorted(members_from_db, key=Member.id_or_max) == sorted(members_from_home_page, key = Member.id_or_max)
     assert len(members_from_home_page) == len(members_from_db)
 
     members_from_home_page_sorted = sorted(members_from_home_page, key = Member.id_or_max)
     members_from_db_sorted = sorted(members_from_db, key=Member.id_or_max)
+
+
     for x in range(len(members_from_home_page_sorted)):
         assert members_from_home_page_sorted[x].lastname == members_from_db_sorted[x].lastname.strip()
         assert members_from_home_page_sorted[x].firstname == members_from_db_sorted[x].firstname.strip()
         assert members_from_home_page_sorted[x].address == members_from_db_sorted[x].address.strip()
-        assert merge_emails_like_on_home_page(members_from_home_page_sorted[x]) == merge_emails_like_on_home_page(members_from_db_sorted[x])
-        assert merge_phones_like_on_home_page(members_from_home_page_sorted[x]) == merge_phones_like_on_home_page(members_from_db_sorted[x])
+        assert members_from_home_page_sorted[x].all_emails_from_home_page == merge_emails_like_on_home_page(members_from_db_sorted[x])
+        assert members_from_home_page_sorted[x].all_phones_from_home_page == merge_phones_like_on_home_page(members_from_db_sorted[x])
 
 
 
 
 
 def clear(s):
-    return re.sub('[()\n -]', "", s)
+    return re.sub('[() -]', "", s)
 
 def merge_phones_like_on_home_page(member):
     return "\n".join(filter(lambda x: x != "",
                             map(lambda x: clear(x),
                                 filter(lambda x: x is not None,
-                                       [member.all_phones_from_home_page]))))
+                                       [member.home, member.mobile, member.work, member.phone2]))))
 
 def merge_emails_like_on_home_page(member):
     return "\n".join(filter(lambda x: x != "",
                             map(lambda x: clear(x),
                                 filter(lambda x: x is not None,
-                                       [member.all_emails_from_home_page]))))
+                                       [member.email, member.email2, member.email3]))))

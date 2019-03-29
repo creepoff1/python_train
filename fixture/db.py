@@ -73,7 +73,8 @@ class DbFixture:
             for row in cursor:
                 (id, firstname, lastname, address, email, email2, email3, home, mobile, work, phone2) = row
                 list.append(
-                    Member(id=str(id), firstname=firstname, lastname=lastname, address=address, all_emails_from_home_page=email + email2 + email3, all_phones_from_home_page=home +
+                    Member(id=str(id), firstname=firstname, lastname=lastname, address=address, home=home, mobile=mobile, work=work, phone2=phone2, email=email, email2=email2, email3=email3,
+                           all_emails_from_db=email + email2 + email3, all_phones_from_db=home +
                                     mobile + work + phone2))
         finally:
             cursor.close()
