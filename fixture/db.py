@@ -1,7 +1,6 @@
-import pymysql.connections
+import pymysql.cursors
 from model.group import Group
-from model.member import Member
-
+from model.contact import Info
 
 class DbFixture:
 
@@ -18,64 +17,21 @@ class DbFixture:
         try:
             cursor.execute("select group_id, group_name, group_header, group_footer from group_list")
             for row in cursor:
-                (id, name, header, footer) = row
-                list.append(Group(id=str(id), name=name, header=header, footer=footer))
-        finally:
-            cursor.close()
-        return list
-
-    def get_list_of_groups_names_and_ids(self):
-        list = []
-        cursor = self.connection.cursor()
-        try:
-            cursor.execute("select group_id, group_name from group_list")
-            for row in cursor:
-                (id, name) = row
-                list.append(Group(id=str(id), name=name))
+                (id, groupname, header, footer) = row
+                list.append(Group(id=str(id), groupname=groupname, header=header, footer=footer))
         finally:
             cursor.close()
         return list
 
 
-    def get_member_list(self):
+    def get_contact_list(self):
         list = []
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select id, firstname, lastname, address, home, mobile, work, phone2, email, email2, email3 from addressbook where deprecated ='0000-00-00 00:00:00'")
+            cursor.execute("select id, firstname, lastname from addressbook where deprecated = '0000-00-00 00:00:00'")
             for row in cursor:
-                (id, firstname, lastname, address, home, mobile, work, phone2, email, email2, email3) = row
-                list.append(Member(id=str(id), firstname=firstname, lastname=lastname, address=address, home=home, mobile=mobile, work=work, phone2=phone2, email=email, email2=email2, email3=email3))
-        finally:
-            cursor.close()
-        return list
-
-
-    def get_member_list_with_merged_emails_and_phones(self):
-        list = []
-        cursor = self.connection.cursor()
-        try:
-            cursor.execute("select id, firstname, lastname, address, home, mobile, work, phone2, email, email2, email3 from addressbook where deprecated='0000-00-00 00:00:00'")
-            for row in cursor:
-                (id, firstname, lastname, address, home, mobile, work, phone2, email, email2, email3) = row
-                list.append(
-                    Member(id=str(id), firstname=firstname, lastname=lastname, address=address,
-                            all_phones_from_home_page=home + mobile + work + phone2, all_emails_from_home_page=email + email2 + email3))
-        finally:
-            cursor.close()
-        return list
-
-    def get_member_list_as_at_ui(self):
-        list = []
-        cursor = self.connection.cursor()
-        try:
-            cursor.execute(
-                "select id, firstname, lastname, address, email, email2, email3, home, mobile, work, phone2 from addressbook where deprecated = '0000-00-00 00:00:00'")
-            for row in cursor:
-                (id, firstname, lastname, address, email, email2, email3, home, mobile, work, phone2) = row
-                list.append(
-                    Member(id=str(id), firstname=firstname, lastname=lastname, address=address, home=home, mobile=mobile, work=work, phone2=phone2, email=email, email2=email2, email3=email3,
-                           all_emails_from_db=email + email2 + email3, all_phones_from_db=home +
-                                    mobile + work + phone2))
+                (id, firstname, lastname) = row
+                list.append(Info(id=str(id), firstname=firstname, lastname=lastname))
         finally:
             cursor.close()
         return list

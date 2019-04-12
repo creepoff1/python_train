@@ -1,15 +1,18 @@
+# -*- coding: utf-8 -*-
 import pytest
+from fixture.application import Application
 import json
+import jsonpickle
 import os.path
 import importlib
-import jsonpickle
-from fixture.application import Application
 from fixture.db import DbFixture
-from fixture.orm import ORMFixture
+from fixture.orm import ORMfixture
+
+
+# @pytest.fixture(scope = "session")
 
 fixture = None
 target = None
-
 
 def load_config(file):
     global target
@@ -19,14 +22,15 @@ def load_config(file):
             target = json.load(f)
     return target
 
+
 @pytest.fixture
 def app(request):
     global fixture
     browser = request.config.getoption("--browser")
     web_config = load_config(request.config.getoption("--target"))['web']
     if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=web_config['baseUrl'])
-    fixture.session.ensure_login(username=web_config['username'], password=web_config['password'])
+        fixture = Application(browser=browser, base_url=web_config["baseURL"])
+    fixture.session.ensure_login(username=web_config["username"], password=web_config["password"])
     return fixture
 
 @pytest.fixture(scope="session")
@@ -39,17 +43,24 @@ def db(request):
     return dbfixture
 
 
+@pytest.fixture(scope="session")
+def orm(request):
+    orm_config = load_config(request.config.getoption("--target"))['orm']
+    ormfixture = ORMfixture(host=orm_config['host'], name=orm_config['name'], user=orm_config['user'], password=orm_config['password'])
+    return ormfixture
+
+
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():
         fixture.session.ensure_logout()
         fixture.destroy()
     request.addfinalizer(fin)
-    return fixture
 
 @pytest.fixture
 def check_ui(request):
     return request.config.getoption("--check_ui")
+
 
 
 def pytest_addoption(parser):
@@ -74,9 +85,3 @@ def load_from_module(module):
 def load_from_json(file):
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "data/%s.json" % file)) as f:
         return jsonpickle.decode(f.read())
-
-@pytest.fixture(scope="session")
-def orm(request):
-    orm_config = load_config(request.config.getoption("--target"))['orm']
-    ormfixture = ORMFixture(host=orm_config['host'], name=orm_config['name'], user=orm_config['user'], password=orm_config['password'])
-    return ormfixture
