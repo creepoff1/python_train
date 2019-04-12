@@ -1,0 +1,53 @@
+{
+  "uid" : "10c40d50f12c43ea",
+  "name" : "test_add_contact_db[None:FN:LNEe  5   :MN?k]",
+  "title" : "Test add contact db [None:FN:LNEe  5   :MN?k]",
+  "time" : {
+    "start" : 1555065344495,
+    "stop" : 1555065345305,
+    "duration" : 810
+  },
+  "summary" : {
+    "attachments" : 0,
+    "steps" : 0
+  },
+  "failure" : {
+    "message" : "AssertionError: assert [329:::None, ...4:::None, ...] == [329:::None, 3...4:::None, ...]\n  Right contains more items, first extra item: None:FN:LNEe  5   :MN?k\n  Use -v to get the full diff",
+    "stackTrace" : "app = <fixture.application.Application object at 0x04B962F0>, db = <fixture.db.DbFixture object at 0x04B94A70>\ncheck_ui = False, json_contacts = None:FN:LNEe  5   :MN?k\n\n    def test_add_contact_db(app, db, check_ui, json_contacts):\n            contact = json_contacts\n            old_contacts = db.get_contact_list()\n            app.contact.create(contact)\n            new_contacts = db.get_contact_list()\n            old_contacts.append(contact)\n>           assert sorted(new_contacts, key=Info.id_or_max) == sorted(old_contacts, key=Info.id_or_max)\nE           assert [329:::None, ...4:::None, ...] == [329:::None, 3...4:::None, ...]\nE             Right contains more items, first extra item: None:FN:LNEe  5   :MN?k\nE             Use -v to get the full diff\n\ntest\\test_add_contact.py:11: AssertionError"
+  },
+  "description" : null,
+  "severity" : "NORMAL",
+  "status" : "FAILED",
+  "suite" : {
+    "uid" : "cc640bd0e643d8dd",
+    "name" : "test.test_add_contact",
+    "title" : "Test add contact"
+  },
+  "steps" : [ ],
+  "attachments" : [ ],
+  "issues" : [ ],
+  "testIds" : [ ],
+  "labels" : [ {
+    "name" : "thread",
+    "value" : "6464-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "suite-name",
+    "value" : "test.test_add_contact"
+  }, {
+    "name" : "suite-title",
+    "value" : null
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "host",
+    "value" : "OBulygin-SPB"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  } ],
+  "parameters" : [ ]
+}

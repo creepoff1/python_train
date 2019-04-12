@@ -1,0 +1,92 @@
+{
+  "features" : [ {
+    "title" : "Without feature",
+    "statistic" : {
+      "total" : 6,
+      "passed" : 6,
+      "pending" : 0,
+      "canceled" : 0,
+      "failed" : 0,
+      "broken" : 0
+    },
+    "stories" : [ {
+      "uid" : "59280ea30ac6791",
+      "title" : "Without story",
+      "statistic" : {
+        "total" : 6,
+        "passed" : 6,
+        "pending" : 0,
+        "canceled" : 0,
+        "failed" : 0,
+        "broken" : 0
+      },
+      "testCases" : [ {
+        "uid" : "1ecd33639bb90113",
+        "name" : "test_add_group_db[None:::]",
+        "title" : "Test add group db [None:::]",
+        "time" : {
+          "start" : 1555066562313,
+          "stop" : 1555066565400,
+          "duration" : 3087
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "88fcd16d146629cc",
+        "name" : "test_add_group_db[None:name%Z *}:Q:header&1t:footer]",
+        "title" : "Test add group db [None:name%Z *}:Q:header&1t:footer]",
+        "time" : {
+          "start" : 1555066565401,
+          "stop" : 1555066565905,
+          "duration" : 504
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "f78ad6e7fb34b827",
+        "name" : "test_add_group_db[None:name24&+ \":headerY(9 Oz:footer]",
+        "title" : "Test add group db [None:name24&+ \":headerY(9 Oz:footer]",
+        "time" : {
+          "start" : 1555066565906,
+          "stop" : 1555066566433,
+          "duration" : 527
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "b7852e7dbe159649",
+        "name" : "test_add_group_db[None:name7k 6GA:header kz:. n1A8##  :footer h &[@& c+K]",
+        "title" : "Test add group db [None:name7k 6GA:header kz:. n1A8##  :footer h &[@& c+K]",
+        "time" : {
+          "start" : 1555066566434,
+          "stop" : 1555066566964,
+          "duration" : 530
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "4eb1ca401645ce7b",
+        "name" : "test_add_group_db[None:name  x:header?5`CqOg]p:footerPDZ^n\\\\pn_.Z(  A%]",
+        "title" : "Test add group db [None:name  x:header?5`CqOg]p:footerPDZ^n\\\\pn_.Z(  A%]",
+        "time" : {
+          "start" : 1555066566964,
+          "stop" : 1555066567512,
+          "duration" : 548
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      }, {
+        "uid" : "e25ac95539a4020",
+        "name" : "test_add_group_db[None:nameu)~}{:Vc:header2.Pwxw\\\\ :footer ~]",
+        "title" : "Test add group db [None:nameu)~}{:Vc:header2.Pwxw\\\\ :footer ~]",
+        "time" : {
+          "start" : 1555066567512,
+          "stop" : 1555066568015,
+          "duration" : 503
+        },
+        "severity" : "NORMAL",
+        "status" : "PASSED"
+      } ]
+    } ]
+  } ]
+}

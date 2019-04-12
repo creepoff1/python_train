@@ -1,0 +1,95 @@
+{
+  "uid" : "250b7092e7396773",
+  "name" : "test_add_group_db[None:name7k 6GA:header kz:. n1A8##  :footer h &[@& c+K]",
+  "title" : "Test add group db [None:name7k 6GA:header kz:. n1A8##  :footer h &[@& c+K]",
+  "time" : {
+    "start" : 1555066135554,
+    "stop" : 1555066136074,
+    "duration" : 520
+  },
+  "summary" : {
+    "attachments" : 0,
+    "steps" : 3
+  },
+  "failure" : null,
+  "description" : null,
+  "severity" : "NORMAL",
+  "status" : "PASSED",
+  "suite" : {
+    "uid" : "4ec57275a90b6c9f",
+    "name" : "test.test_add_group",
+    "title" : "Test add group"
+  },
+  "steps" : [ {
+    "name" : "Given a group list",
+    "title" : "Given a group list",
+    "time" : {
+      "start" : 1555066135583,
+      "stop" : 1555066135584,
+      "duration" : 1
+    },
+    "summary" : {
+      "attachments" : 0,
+      "steps" : 0
+    },
+    "status" : "PASSED",
+    "attachments" : [ ],
+    "steps" : [ ]
+  }, {
+    "name" : "When I add the group None:name7k 6GA:header kz:. n1A8##  :footer h &[@& c+K to the list",
+    "title" : "When I add the group None:name7k 6GA:header kz:. n1A8##  :footer h &[@& c+K to the list",
+    "time" : {
+      "start" : 1555066135584,
+      "stop" : 1555066136073,
+      "duration" : 489
+    },
+    "summary" : {
+      "attachments" : 0,
+      "steps" : 0
+    },
+    "status" : "PASSED",
+    "attachments" : [ ],
+    "steps" : [ ]
+  }, {
+    "name" : "Then the new group list is equal to the old list with added group",
+    "title" : "Then the new group list is equal to the old list with added group",
+    "time" : {
+      "start" : 1555066136073,
+      "stop" : 1555066136074,
+      "duration" : 1
+    },
+    "summary" : {
+      "attachments" : 0,
+      "steps" : 0
+    },
+    "status" : "PASSED",
+    "attachments" : [ ],
+    "steps" : [ ]
+  } ],
+  "attachments" : [ ],
+  "issues" : [ ],
+  "testIds" : [ ],
+  "labels" : [ {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "suite-title",
+    "value" : null
+  }, {
+    "name" : "severity",
+    "value" : "normal"
+  }, {
+    "name" : "suite-name",
+    "value" : "test.test_add_group"
+  }, {
+    "name" : "thread",
+    "value" : "12420-MainThread"
+  }, {
+    "name" : "host",
+    "value" : "OBulygin-SPB"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  } ],
+  "parameters" : [ ]
+}
