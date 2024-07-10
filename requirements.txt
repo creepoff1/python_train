@@ -6,3 +6,4 @@ pony
 PyMySQL
 lxml-4.3.3-cp37-cp37m-win32.whl
 pytest-allure-adaptor
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
